@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<ctype.h>
+#define maxsize 100
+#define postfixsize 100
+int top=-1;
+int stack[maxsize];
+char postfix[50];
+void push(char item){
+stack[++top]=item;
+}
+char pop(){
+return stack[top--];
+}
+void evalpost(char postfix[]){
+int i,op1,op2,val,ch;
+for(i=0;postfix[i]!=')';i++){
+ch=postfix[i];
+if(isdigit(ch)){
+push(ch-'0');
+}else if(ch=='+' || ch=='-' || ch=='*' || ch=='/'){
+op2=pop();
+op1=pop();
+switch(ch){
+case '+':
+val=op1+op2;
+break;
+case '-':
+val=op1-op2;
+break;
+case '*':
+val=op1*op2;
+break;
+case '/':
+val=op1/op2;
+break;
+}
+push(val);
+}
+}
+printf("The Resultant postfix evaluation value is: %d\n",pop());
+}
+void main(){
+int i;
+printf("\nEnter the postfix expression (press right parenthesis ')' to end the expression): \n");
+for(i=0;i<postfixsize-1;i++){
+scanf(" %c",&postfix[i]);
+if(postfix[i]==')'){
+break;
+}
+}
+evalpost(postfix);
+}
