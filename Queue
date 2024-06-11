@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define ms 5
+int q[ms];
+int f=-1;
+int r=-1;
+void insert(int ele){
+if(r==ms-1){
+printf("Queue is full!\n");
+return;
+}
+if(f==-1){
+f=0;
+}
+q[++r]=ele;
+}
+void display(){
+int i;
+if(f==-1){
+printf("\nQueue is empty!\n");
+return;
+}
+printf("\nQueue elements available are: ");
+for(i=f;i<=r;i++){
+printf("%d ",q[i]);
+}
+printf("\n");
+}
+void delete(){
+if(f==-1){
+printf("Queue is empty!\n");
+return;
+}
+printf("\nDeleted element from the queue is: %d\n", q[f++]);
+if(f>r){
+f=r=-1;
+}
+}
+int main(){
+int ch, ele;
+while(1){
+printf("\n1.INSERT\n2.DELETE\n3.DISPLAY\n4.EXIT\n");
+printf("Enter your choice: ");
+scanf("%d", &ch);
+switch(ch){
+case 1:
+printf("\nEnter element to insert: ");
+scanf("%d", &ele);
+insert(ele);
+break;
+case 2:
+delete();
+break;
+case 3:
+display();
+break;
+case 4:
+printf("\nEXITING PROGRAM!\n");
+exit(0);
+default:
+printf("INVALID CHOICE!\n");
+}
+}
+return 0;
+}
